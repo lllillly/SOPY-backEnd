@@ -12,7 +12,7 @@ const Student = new Schema(
       type: Number,
       requried: true,
     },
-    moblie: {
+    mobile: {
       type: String,
       requried: true,
     },
@@ -24,6 +24,12 @@ const Student = new Schema(
       type: String,
       requried: true,
     },
+    lecture: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Lecture`,
+      },
+    ],
   },
   {
     versionKey: false,
