@@ -31,5 +31,27 @@ export default {
         return {};
       }
     },
+
+    searchBook: async (_, args) => {
+      const { title } = args;
+
+      try {
+        console.log(title);
+        const result = await Book.find(
+          {
+            title: {
+              $regex: `.*${title}.*`,
+              /* 정규 표현식 */
+            },
+          },
+          {}
+        ).sort({ price: 1 });
+
+        return result;
+      } catch (e) {
+        console.log(e);
+        return {};
+      }
+    },
   },
 };
