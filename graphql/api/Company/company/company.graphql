@@ -1,3 +1,5 @@
 type Query {
   getAllCompanies: [Company!]!
+
+  searchCompany(value: String!): [Company!]!
 }

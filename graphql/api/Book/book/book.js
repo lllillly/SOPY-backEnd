@@ -53,5 +53,19 @@ export default {
         return {};
       }
     },
+
+    getBooks: async (_, args) => {
+      try {
+        const result = await Book.find({}, {}).populate({
+          path: `author`,
+          model: Author,
+        });
+
+        return result;
+      } catch (e) {
+        console.log(e);
+        return [];
+      }
+    },
   },
 };
