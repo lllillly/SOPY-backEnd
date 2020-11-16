@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const Video = new Schema(
   {
+    thumbnailPath: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -24,13 +28,21 @@ const Video = new Schema(
       type: Number,
       required: true,
     },
-    likes: {
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`,
+      },
+    ],
+    comment: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Comment`,
+      },
+    ],
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: `User`,
-    },
-    comment: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: `Comment`,
     },
   },
   { versionKey: false }
