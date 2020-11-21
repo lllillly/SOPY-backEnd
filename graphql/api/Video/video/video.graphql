@@ -1,7 +1,7 @@
 type Query {
   seeAllVideos: [Video!]!
   seeDetailVideo(id: String!): Video!
-  seeVideosByUSer(id: String!): User!
+  seeVideosByUser(id: String!): User!
   searchVideoByTitle(sTitle: String!): [Video!]!
 }
 

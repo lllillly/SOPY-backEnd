@@ -32,7 +32,7 @@ export default {
         return {};
       }
     },
-    seeVideosByUSer: async (_, args) => {
+    seeVideosByUser: async (_, args) => {
       const { id } = args;
 
       try {
