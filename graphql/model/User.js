@@ -4,21 +4,33 @@ const Schema = mongoose.Schema;
 
 const User = new Schema(
   {
-    email: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
     },
-    mobile: {
+    moblie: {
       type: String,
       required: true,
     },
-    secretCode: {
+    email: {
       type: String,
-      required: false,
+      required: true,
+    },
+    nickName: {
+      type: String,
+      required: true,
+    },
+    zoneCode: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    detailAddress: {
+      type: String,
+      required: true,
     },
     createdAt: {
       type: String,
@@ -30,10 +42,16 @@ const User = new Schema(
         ref: `Video`,
       },
     ],
-    comments: [
+    subscribeForMe: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: `Comment`,
+        ref: `User`,
+      },
+    ],
+    subscribeToOther: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`,
       },
     ],
   },
