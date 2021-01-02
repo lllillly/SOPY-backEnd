@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
+// const <--변하지 않는다는 의미  Schema <-- 객체는 대문자로 시작함
 
 const User = new Schema(
   {
@@ -8,7 +9,7 @@ const User = new Schema(
       type: String,
       required: true,
     },
-    moblie: {
+    mobile: {
       type: String,
       required: true,
     },
@@ -32,30 +33,33 @@ const User = new Schema(
       type: String,
       required: true,
     },
-    createdAt: {
-      type: String,
-      required: true,
-    },
-    videos: [
+    Videos: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: `Video`,
       },
     ],
-    subscribeForMe: [
+    subcribeForMe: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`,
       },
     ],
-    subscribeToOther: [
+    subcribeToOther: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: `User`,
       },
     ],
+    secretCode: {
+      type: String,
+      required: true,
+      default: "-",
+    },
   },
   { versionKey: false }
 );
 
 export default mongoose.model(`User`, User, `User`);
+// export default를 하여 외부에서도 사용 가능하게 만들어준다.
+// (`별칭`, 실제 객체 , `몽고DB안에 있는 진짜 별칭스키마는 뭔데?`)
