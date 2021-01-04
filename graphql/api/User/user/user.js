@@ -4,6 +4,33 @@ import smtpPool from "nodemailer-smtp-pool";
 
 export default {
   Mutation: {
+    checkSecretCode: async (_, args) => {
+      const { email, code } = args;
+
+      try {
+        const tryUser = await User.findOne({ email });
+
+        console.log(tryUser.secretCode);
+
+        console.log(`INPuT : ${code}`);
+
+        if (tryUser.secretCode === code) {
+          await User.updateOne(
+            { email },
+            {
+              $set: { secretCode: `` },
+            }
+          );
+
+          return true;
+        } else {
+          return false;
+        }
+      } catch (e) {
+        console.log(e);
+        return false;
+      }
+    },
     registUser: async (_, args) => {
       const {
         name,
@@ -52,19 +79,7 @@ export default {
         if (exist.length > 0) {
           // 가입 되어 있다면, 인증 코드 생성
 
-          const randomCode = [
-            `0`,
-            `1`,
-            `2`,
-            `3`,
-            `4`,
-            `5`,
-            `6`,
-            `7`,
-            `8`,
-            `9`,
-            `10`,
-          ];
+          const randomCode = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
 
           const code =
             randomCode[Math.floor(Math.random() * 10)] +
@@ -93,7 +108,7 @@ export default {
           const mailOpt = {
             from: "nijoyh0503@gmail.com",
             to: email,
-            subject: "🔐인증코드 전송 [www.sempreblu.com]",
+            subject: "🔐인증코드 전송 [https://www.sopy.com]",
             html: `인증코드는 ${code} 입니다.`,
           };
 
@@ -122,7 +137,7 @@ export default {
         }
 
         // 해당 이메일로 인증 코드 전송
-
+        return true;
         // 전송 후 return true;
       } catch (e) {
         console.log(e);
